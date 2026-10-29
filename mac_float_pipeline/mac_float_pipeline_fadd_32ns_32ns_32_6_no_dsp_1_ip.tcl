@@ -4,7 +4,7 @@ set fpo_ver 7.1
 if {[regexp -nocase {2015\.1.*} $vivado_ver match]} {
     set fpo_ver 7.0
 }
-create_ip -name floating_point -version $fpo_ver -vendor xilinx.com -library ip -module_name mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip
+create_ip -name floating_point -version $fpo_ver -vendor xilinx.com -library ip -module_name mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip
 # BEGIN Vivado Commands 
 # BEGIN Vivado Parameters
 set_property -dict [list CONFIG.a_precision_type Single \
@@ -18,13 +18,13 @@ set_property -dict [list CONFIG.a_precision_type Single \
                           CONFIG.c_has_invalid_op false \
                           CONFIG.c_has_overflow false \
                           CONFIG.c_has_underflow false \
-                          CONFIG.c_latency 5 \
-                          CONFIG.c_mult_usage Full_Usage \
+                          CONFIG.c_latency 4 \
+                          CONFIG.c_mult_usage No_Usage \
                           CONFIG.c_optimization Speed_Optimized \
                           CONFIG.c_rate 1 \
                           CONFIG.c_result_exponent_width 8 \
                           CONFIG.c_result_fraction_width 24 \
-                          CONFIG.component_name mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip \
+                          CONFIG.component_name mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip \
                           CONFIG.flow_control NonBlocking \
                           CONFIG.has_a_tlast false \
                           CONFIG.has_a_tuser false \
@@ -39,7 +39,7 @@ set_property -dict [list CONFIG.a_precision_type Single \
                           CONFIG.operation_tuser_width 1 \
                           CONFIG.operation_type Add_Subtract \
                           CONFIG.result_precision_type Single \
-                          CONFIG.result_tlast_behv Null] -objects [get_ips mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip] -quiet
+                          CONFIG.result_tlast_behv Null] -objects [get_ips mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip] -quiet
 # END Vivado Parameters
-set_property generate_synth_checkpoint false [get_files mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip.xci]
-generate_target {synthesis simulation} [get_files mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip.xci]
+set_property generate_synth_checkpoint false [get_files mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip.xci]
+generate_target {synthesis simulation} [get_files mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip.xci]

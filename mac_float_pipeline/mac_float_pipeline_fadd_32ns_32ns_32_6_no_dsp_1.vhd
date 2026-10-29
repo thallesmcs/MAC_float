@@ -6,7 +6,7 @@
 Library ieee;
 use ieee.std_logic_1164.all;
 
-entity mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1 is
+entity mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1 is
     generic (
         ID         : integer := 1;
         NUM_STAGE  : integer := 3;
@@ -24,9 +24,9 @@ entity mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1 is
     );
 end entity;
 
-architecture arch of mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1 is
+architecture arch of mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1 is
     --------------------- Component ---------------------
-    component mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip is
+    component mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip is
         port (
             aclk                 : in  std_logic;
             aclken               : in  std_logic;
@@ -54,7 +54,7 @@ architecture arch of mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1 is
     signal dout_r    : std_logic_vector(dout_WIDTH-1 downto 0);
 begin
     --------------------- Instantiation -----------------
-    mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip_u : component mac_float_pipeline_fadd_32ns_32ns_32_7_full_dsp_1_ip
+    mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip_u : component mac_float_pipeline_fadd_32ns_32ns_32_6_no_dsp_1_ip
     port map (
         aclk                 => aclk,
         aclken               => aclken,

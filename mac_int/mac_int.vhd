@@ -14,7 +14,6 @@ port (
     ap_rst : IN STD_LOGIC;
     a : IN STD_LOGIC_VECTOR (31 downto 0);
     b : IN STD_LOGIC_VECTOR (31 downto 0);
-    c : IN STD_LOGIC_VECTOR (31 downto 0);
     result : OUT STD_LOGIC_VECTOR (31 downto 0) );
 end;
 
@@ -22,26 +21,28 @@ end;
 architecture behav of mac_int is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "mac_int_mac_int,hls_ip_2025_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7s50-csga324-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.890000,HLS_SYN_LAT=2,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=200,HLS_SYN_LUT=110,HLS_VERSION=2025_1}";
+    "mac_int_mac_int,hls_ip_2025_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7s50-csga324-1,HLS_INPUT_CLOCK=10.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.890000,HLS_SYN_LAT=2,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=232,HLS_SYN_LUT=110,HLS_VERSION=2025_1}";
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_ST_fsm_state1 : STD_LOGIC_VECTOR (2 downto 0) := "001";
     constant ap_ST_fsm_state2 : STD_LOGIC_VECTOR (2 downto 0) := "010";
     constant ap_ST_fsm_state3 : STD_LOGIC_VECTOR (2 downto 0) := "100";
-    constant ap_const_boolean_1 : BOOLEAN := true;
     constant ap_const_lv32_0 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
+    constant ap_const_boolean_1 : BOOLEAN := true;
     constant ap_const_lv32_1 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000001";
     constant ap_const_lv32_2 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000010";
 
+    signal acc : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
     signal ap_CS_fsm : STD_LOGIC_VECTOR (2 downto 0) := "001";
     attribute fsm_encoding : string;
     attribute fsm_encoding of ap_CS_fsm : signal is "none";
     signal ap_CS_fsm_state1 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state1 : signal is "none";
-    signal grp_fu_55_p2 : STD_LOGIC_VECTOR (31 downto 0);
-    signal mul_ln15_reg_77 : STD_LOGIC_VECTOR (31 downto 0);
+    signal grp_fu_49_p2 : STD_LOGIC_VECTOR (31 downto 0);
+    signal mult_reg_81 : STD_LOGIC_VECTOR (31 downto 0);
     signal ap_CS_fsm_state2 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state2 : signal is "none";
+    signal add_ln14_fu_59_p2 : STD_LOGIC_VECTOR (31 downto 0);
     signal ap_CS_fsm_state3 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state3 : signal is "none";
     signal ap_NS_fsm : STD_LOGIC_VECTOR (2 downto 0);
@@ -82,7 +83,7 @@ begin
         din0 => b,
         din1 => a,
         ce => ap_const_logic_1,
-        dout => grp_fu_55_p2);
+        dout => grp_fu_49_p2);
 
 
 
@@ -102,8 +103,16 @@ begin
     process (ap_clk)
     begin
         if (ap_clk'event and ap_clk = '1') then
+            if ((ap_const_logic_1 = ap_CS_fsm_state3)) then
+                acc <= add_ln14_fu_59_p2;
+            end if;
+        end if;
+    end process;
+    process (ap_clk)
+    begin
+        if (ap_clk'event and ap_clk = '1') then
             if ((ap_const_logic_1 = ap_CS_fsm_state2)) then
-                mul_ln15_reg_77 <= grp_fu_55_p2;
+                mult_reg_81 <= grp_fu_49_p2;
             end if;
         end if;
     end process;
@@ -121,11 +130,12 @@ begin
                 ap_NS_fsm <= "XXX";
         end case;
     end process;
+    add_ln14_fu_59_p2 <= std_logic_vector(unsigned(acc) + unsigned(mult_reg_81));
     ap_CS_fsm_state1 <= ap_CS_fsm(0);
     ap_CS_fsm_state2 <= ap_CS_fsm(1);
     ap_CS_fsm_state3 <= ap_CS_fsm(2);
     ap_ST_fsm_state1_blk <= ap_const_logic_0;
     ap_ST_fsm_state2_blk <= ap_const_logic_0;
     ap_ST_fsm_state3_blk <= ap_const_logic_0;
-    result <= std_logic_vector(unsigned(mul_ln15_reg_77) + unsigned(c));
+    result <= std_logic_vector(unsigned(acc) + unsigned(mult_reg_81));
 end behav;
