@@ -1,0 +1,8 @@
+nome_arquitetura,testes,falhas,falhas_fluxo,latencia_ciclos,intervalo_iniciacao_ciclos,periodo_teste_ns,latencia_nominal_teste_ns,vazao_teste_Mops_s,max_valores_intermediarios,max_erro_absoluto_matematico,simulacao
+mac_float,96,0,0,10,11,10,100,9.090909090909092,1,14675014.0,RTL_com_IP_Xilinx_Vivado
+mac_float_simp,96,0,0,10,11,10,100,9.090909090909092,1,14675014.0,RTL_com_IP_Xilinx_Vivado
+mac_float_comb,96,0,0,9,10,10,90,10.0,1,14675014.0,RTL_com_IP_Xilinx_Vivado
+mac_float_comb_dsp,96,0,0,10,11,10,100,9.090909090909092,1,14675014.0,RTL_com_IP_Xilinx_Vivado
+mac_float_comb_dsp_latency0,96,92,90,0,0,10,0,N/A,0,281474959933440.0,RTL_com_IP_Xilinx_Vivado
+mac_float_pipeline,96,0,0,10,1,10,100,100.0,0,14675014.0,RTL_com_IP_Xilinx_Vivado
+mac_int,96,0,0,2,3,10,20,33.333333333333336,1,281474976710656.0,RTL_com_IP_Xilinx_Vivado
